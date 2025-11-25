@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>MP Produções - VigioMake das Estrelas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      color: #222;
+      background: #0b0b0f;
+      line-height: 1.6;
+    }
+
+    header {
+      background: radial-gradient(circle at top left, #ffce6a, #070710);
+      color: #fff;
+      padding: 40px 20px 60px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    nav .logo {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 3.2vw, 3rem);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #ffce6a;
+      margin-bottom: 10px;
+    }
+
+    .subtag {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      background: #ffce6a;
+      color: #222;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+      background: #ffc553;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: none;
+      margin-left: 10px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0,0,0,0.2);
+      box-shadow: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 260px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, rgba(255,206,106,0.35), transparent),
+                  radial-gradient(circle at bottom, rgba(102,102,255,0.35), #05050a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      opacity: 0.95;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    section:nth-of-type(even) {
+      background: #0f0f16;
+    }
+
+    section:nth-of-type(odd) {
+      background: #12121a;
+    }
+
+    h2.section-title {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #fff;
+    }
+
+    h2.section-title span {
+      color: #ffce6a;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: -18px;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      color: #eee;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 2fr);
+      gap: 30px;
+      align-items: center;
+      color: #eee;
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, #ffce6a, #333);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #111;
+      border: 2px solid #ffce6a;
+    }
+
+    .about p {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #181824;
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      font-size: 0.95rem;
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: #ffce6a;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .video-thumb,
+    .video-wrapper {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .video-thumb video,
+    .video-wrapper iframe {
+      width: 100%;
+      height: 200px;
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ccc;
+    }
+
+    .before-after-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .ba-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      color: #bbb;
+    }
+
+    .ba-videos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .ba-videos video,
+    .ba-videos iframe {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #000;
+    }
+
+    .contact {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      color: #eee;
+    }
+
+    .contact p {
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 10px 26px;
+      font-size: 0.8rem;
+      color: #999;
+      background: #050509;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        order: -1;
+        margin-bottom: 10px;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .ba-videos {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">MP Produções</div>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#antesdepois">Antes & Depois</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero">
+        <div>
+          <div class="hero-badge">
+            <span>🎬</span> <span>Videomaker • MP Produções</span>
+          </div>
+          <div class="tag">VigioMake das Estrelas</div>
+          <h1>Sou Videomaker e levo seus vídeos para o nível de estrela.</h1>
+          <p>
+            Transformo vídeos comuns em materiais profissionais, com cortes dinâmicos,
+            correção de cor, trilhas, efeitos e ritmo perfeito para redes sociais,
+            lançamentos e presença digital.
+          </p>
+          <div class="subtag">
+            Reels • Shorts • TikTok • Vídeos para experts e criadores
+          </div>
+          <a href="#portfolio" class="btn">Ver portfólio em ação</a>
+          <a href="#contato" class="btn btn-outline">Falar com a MP Produções</a>
+        </div>
+        <div class="hero-image">
+          <div>
+            <strong>VigioMake das Estrelas</strong><br/>
+            Edição focada em impacto visual, ritmo e storytelling,<br/>
+            para você parecer ainda mais profissional em cada vídeo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title">Quem está por trás da <span>MP Produções</span>?</h2>
+      <p class="section-subtitle">Videomaker • VigioMake das Estrelas</p>
+
+      <div class="about">
+        <div class="about-photo">
+          Sua foto aqui
+        </div>
+        <div>
+          <p>
+            Sou Videomaker à frente da <strong>MP Produções</strong>,
+            conhecido como <strong>VigioMake das Estrelas</strong>. Trabalho com edição
+            de vídeo focada em criadores de conteúdo, influenciadores, profissionais
+            liberais e empresas que querem elevar a qualidade visual da sua marca.
+          </p>
+          <p>
+            Meu foco é transformar gravações brutas em vídeos prontos para
+            performar: cortes inteligentes, ritmo dinâmico, correção de cor,
+            ajustes de áudio e tudo o que deixa seu conteúdo com cara de
+            produção profissional.
+          </p>
+          <p>
+            Nesta página você encontra alguns exemplos de trabalhos e também
+            comparações de <strong>antes e depois</strong> para ver, na prática,
+            o tipo de resultado que posso entregar pra você.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="container">
+      <h2 class="section-title">O que a <span>MP Produções</span> faz por você</h2>
+      <p class="section-subtitle">Serviços e estilos de edição que posso aplicar nos seus vídeos</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Edição para redes sociais</h3>
+          <p>
+            Montagem completa de <strong>Reels, Shorts e TikTok</strong>, com
+            cortes rápidos, legendas, trilha, efeitos pontuais e tudo pensado
+            para reter atenção até o final.
+          </p>
+        </div>
+        <div class="card">
+          <h3>VigioMake Premium</h3>
+          <p>
+            Edição mais detalhada e refinada, com tratamento de cor, transições
+            personalizadas, efeitos, inserts de tela e um cuidado especial com
+            identidade visual.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Vídeos para lançamentos e autoridade</h3>
+          <p>
+            Edição de vídeos de pitch, depoimentos, cortes de aula, bastidores
+            e materiais para fortalecer a sua imagem como especialista.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title">Portfólio em <span>vídeo</span></h2>
+      <p class="section-subtitle">Alguns exemplos de vídeos já editados pela MP Produções</p>
+
+      <div class="grid">
+        <!-- PROJETO 1 -->
+        <div class="card">
+          <div class="video-thumb">
+            <!-- Exemplo com arquivo MP4 hospedado na sua própria hospedagem -->
+            <video controls>
+              <source src="videos/projeto1.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <!--
+            Se o vídeo estiver no YouTube, use isso no lugar do <video>:
+
+            <iframe
+              src="https://www.youtube.com/embed/SEU_ID_AQUI"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+            -->
+          </div>
+          <h3>Vídeo para redes sociais</h3>
+          <p>
+            Corte dinâmico, legendas chamativas e trilha em sincronia com o
+            conteúdo para um expert em [nicho]. Focado em retenção e CTA final.
+          </p>
+          <span class="badge">Reels / Shorts</span>
+        </div>
+
+        <!-- PROJETO 2 -->
+        <div class="card">
+          <div class="video-thumb">
+            <video controls>
+              <source src="videos/projeto2.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+          </div>
+          <h3>VigioMake Premium</h3>
+          <p>
+            Edição com tratamento de cor, efeitos sutis, cortes de câmera
+            e elementos gráficos alinhados com a identidade visual da marca.
+          </p>
+          <span class="badge">Premium</span>
+        </div>
+
+        <!-- PROJETO 3 -->
+        <div class="card">
+          <div class="video-thumb">
+            <video controls>
+              <source src="videos/projeto3.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+          </div>
+          <h3>Cortes de podcast / entrevista</h3>
+          <p>
+            Seleção dos melhores momentos, cortes certeiros e legendas
+            otimizadas para distribuir nas redes sociais e aumentar alcance.
+          </p>
+          <span class="badge">Cortes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="antesdepois">
+    <div class="container">
+      <h2 class="section-title">Antes & <span>Depois</span> da edição</h2>
+      <p class="section-subtitle">Veja a diferença entre o bruto enviado e o resultado final da MP Produções</p>
+
+      <div class="before-after-grid">
+        <!-- BLOCO 1 -->
+        <div class="card">
+          <h3>Transformação 1</h3>
+          <div class="ba-labels">
+            <span>Antes (bruto)</span>
+            <span>Depois (editado)</span>
+          </div>
+          <div class="ba-videos">
+            <video controls>
+              <source src="videos/ba1-antes.mp4" type="video/mp4">
+            </video>
+            <video controls>
+              <source src="videos/ba1-depois.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p style="margin-top:10px; font-size:0.9rem;">
+            Ajuste de enquadramento, cortes de silêncio, correção de cor,
+            trilha de fundo e legendas para deixar o conteúdo pronto para postar.
+          </p>
+        </div>
+
+        <!-- BLOCO 2 -->
+        <div class="card">
+          <h3>Transformação 2</h3>
+          <div class="ba-labels">
+            <span>Antes</span>
+            <span>Depois</span>
+          </div>
+          <div class="ba-videos">
+            <video controls>
+              <source src="videos/ba2-antes.mp4" type="video/mp4">
+            </video>
+            <video controls>
+              <source src="videos/ba2-depois.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p style="margin-top:10px; font-size:0.9rem;">
+            Conteúdo cru transformado em vídeo com cortes mais rápidos, efeitos
+            de texto e destaque nos pontos principais da fala.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title">Vamos editar seus vídeos?</h2>
+      <p class="section-subtitle">Entre em contato e me envia seu material para orçamento</p>
+
+      <div class="contact">
+        <p>
+          Se você quer levar seus vídeos para um nível de estrela, me chama no
+          WhatsApp ou nas redes sociais. Me envia o material bruto e te ajudo a
+          transformar em conteúdo pronto para postar.
+        </p>
+        <div class="contact-links">
+          <a href="https://wa.me/55SEUNUMERO" target="_blank" class="btn">
+            Falar no WhatsApp
+          </a>
+          <a href="mailto:seuemail@exemplo.com" class="btn btn-outline">
+            Enviar e-mail
+          </a>
+          <a href="https://www.instagram.com/seuuser" target="_blank" class="btn btn-outline">
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> MP Produções — VigioMake das Estrelas.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
